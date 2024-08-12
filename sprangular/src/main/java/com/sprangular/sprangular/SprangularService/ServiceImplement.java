@@ -11,4 +11,6 @@ public interface ServiceImplement {
     ResponseEntity<String> registerUser(Model user);
 
     ResponseEntity<Model> getUserByID(int id);
+
+    ResponseEntity<String> deleteUser(int id);
 }

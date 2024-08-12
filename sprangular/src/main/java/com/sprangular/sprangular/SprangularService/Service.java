@@ -43,4 +43,15 @@ public class Service implements ServiceImplement {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
   }
+
+    public ResponseEntity<String> deleteUser(int id){
+        Optional<Model> model = sprangularRepo.findById(id);
+
+        if (model.isPresent()){
+            sprangularRepo.deleteById(id);
+            return new ResponseEntity<>("Id successfuly deleted",HttpStatus.OK);
+        }else {
+            return  new ResponseEntity<>("No such id found in database",HttpStatus.BAD_REQUEST);
+        }
+    }
 }

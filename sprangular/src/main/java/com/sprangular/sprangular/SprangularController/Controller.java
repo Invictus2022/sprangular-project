@@ -35,4 +35,9 @@ public class Controller {
     public ResponseEntity<Model> getUserByID(@PathVariable int id){
         return Service.getUserByID(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id){
+        return Service.deleteUser(id);
+    }
 }
