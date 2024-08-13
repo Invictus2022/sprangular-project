@@ -1,6 +1,7 @@
 package com.sprangular.sprangular.SprangularService;
-import com.sprangular.sprangular.SprangularRepository.Repository;
+
 import com.sprangular.sprangular.SprangularModel.Model;
+import com.sprangular.sprangular.SprangularRepository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class Service implements ServiceImplement {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
   }
-
+    @Override
     public ResponseEntity<String> deleteUser(int id){
         Optional<Model> model = sprangularRepo.findById(id);
 
@@ -52,6 +53,25 @@ public class Service implements ServiceImplement {
             return new ResponseEntity<>("Id successfuly deleted",HttpStatus.OK);
         }else {
             return  new ResponseEntity<>("No such id found in database",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> updateUser(int id, Model model){
+        Optional<Model> rmodel = sprangularRepo.findById(id);
+        if (rmodel.isPresent()){
+            Model existingUser = rmodel.get();
+            existingUser.setId(model.getId());
+            existingUser.setFirstname(model.getFirstname());
+            existingUser.setLastname(model.getLastname());
+            existingUser.setUsername(model.getUsername());
+            existingUser.setPassword(model.getPassword());
+
+            sprangularRepo.save(existingUser);
+
+            return new ResponseEntity<>("Database succesfuly updated",HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
 }

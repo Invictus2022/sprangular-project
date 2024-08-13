@@ -13,4 +13,6 @@ public interface ServiceImplement {
     ResponseEntity<Model> getUserByID(int id);
 
     ResponseEntity<String> deleteUser(int id);
+
+    ResponseEntity<String> updateUser(int id, Model model);
 }

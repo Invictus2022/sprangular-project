@@ -40,4 +40,9 @@ public class Controller {
     public ResponseEntity<String> deleteUser(@PathVariable int id){
         return Service.deleteUser(id);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable("id") int id, @RequestBody Model model){
+        return Service.updateUser(id,model);
+    }
 }
